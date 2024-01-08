@@ -1,16 +1,40 @@
-# checkout_payment_app
+# Payment App
 
-A new Flutter project.
+## 1. Introduction
+This documentation outlines the Flutter Payment App, a mobile application designed to facilitate payments using Stripe and PayPal. The app employs the MVVM architecture and utilizes various packages and tools like Bloc (Cubit), dartz, dio, flutter_stripe, and flutter_paypal_payment for efficient state management and functionality.
 
-## Getting Started
+## 2. Features
+- Payment processing via Stripe and PayPal.
+- Secure and seamless transaction flow.
+- User-friendly interface.
+- State management using Bloc (Cubit).
+- Error handling and data validation.
 
-This project is a starting point for a Flutter application.
+## 3. Project Structure
+The project follows the MVVM (Model-View-ViewModel) architecture, which separates the business logic, presentation, and data layers for better maintainability and scalability.
 
-A few resources to get you started if this is your first Flutter project:
+## 4. Dependencies and Tools
+- Bloc (Cubit): State management library for managing UI and data synchronization.
+- dartz: Functional programming library for error handling and data modeling.
+- dio: HTTP client for making API calls.
+- flutter_stripe: Flutter plugin for Stripe integration.
+- flutter_paypal_payment: Flutter plugin for PayPal integration.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 5. Main Screens
+The Flutter Payment Gateway App contains the following main screens:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Product and Prices Screen
+- Displays a list of products with their corresponding prices.
+
+### Stripe Payment Sheet
+- Provides a payment sheet for Stripe integration.
+- Enables users to enter payment details and complete transactions securely.
+
+### PayPal WebView Payment Sheet
+- Integrates PayPal payments using a WebView interface.
+- Facilitates secure payment processing via PayPal.
+
+## 6. Usage
+1. Run the app on an emulator or physical device.
+2. Navigate through the app to explore payment options and functionalities.
+3. Follow the on-screen instructions to complete payments using Stripe or PayPal.
