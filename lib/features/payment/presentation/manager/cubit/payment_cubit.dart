@@ -7,8 +7,8 @@ import 'package:meta/meta.dart';
 
 part 'payment_state.dart';
 
-class PaymentCubitCubit extends Cubit<PaymentState> {
-  PaymentCubitCubit(this.checkoutRepo) : super(PaymentInitial());
+class PaymentCubit extends Cubit<PaymentState> {
+  PaymentCubit(this.checkoutRepo) : super(PaymentInitial());
   final CheckoutRepo checkoutRepo;
 
   Future makePayment(
