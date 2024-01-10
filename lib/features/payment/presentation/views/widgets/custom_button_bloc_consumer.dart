@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:checkout_payment_app/core/utils/api_keys.dart';
 import 'package:checkout_payment_app/core/widgets/custom_button.dart';
 import 'package:checkout_payment_app/features/payment/data/models/amount_model/amount_model.dart';
 import 'package:checkout_payment_app/features/payment/data/models/amount_model/details.dart';
@@ -52,12 +53,13 @@ class CustomButtonBlocConsumer extends StatelessWidget {
     );
   }
 
-  void executePayPalPayment(BuildContext context, ({AmountModel amount, ItemListModel itemList}) transactionData) {
+  void executePayPalPayment(BuildContext context,
+      ({AmountModel amount, ItemListModel itemList}) transactionData) {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (BuildContext context) => PaypalCheckoutView(
         sandboxMode: true,
-        clientId: "YOUR CLIENT ID",
-        secretKey: "YOUR SECRET KEY",
+        clientId: ApiKeys.clientId,
+        secretKey: ApiKeys.paypalSecretKey,
         transactions: [
           {
             "amount": transactionData.amount.toJson(),
@@ -68,7 +70,9 @@ class CustomButtonBlocConsumer extends StatelessWidget {
         note: "Contact us for any questions on your order.",
         onSuccess: (Map params) async {
           log("onSuccess: $params");
-          Navigator.pop(context);
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return ThankYouView();
+          }));
         },
         onError: (error) {
           log("onError: $error");
