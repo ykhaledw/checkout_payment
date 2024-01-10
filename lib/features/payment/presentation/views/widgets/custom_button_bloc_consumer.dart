@@ -38,7 +38,7 @@ class CustomButtonBlocConsumer extends StatelessWidget {
               BlocProvider.of<PaymentCubit>(context).makePayment(
                   paymentIntentInputModel: paymentIntentInputModel);*/
 
-         Navigator.of(context).push(MaterialPageRoute(
+              Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => PaypalCheckoutView(
                   sandboxMode: true,
                   clientId: "YOUR CLIENT ID",
@@ -55,10 +55,6 @@ class CustomButtonBlocConsumer extends StatelessWidget {
                         }
                       },
                       "description": "The payment transaction description.",
-                      // "payment_options": {
-                      //   "allowed_payment_method":
-                      //       "INSTANT_FUNDING_SOURCE"
-                      // },
                       "item_list": {
                         "items": [
                           {
@@ -74,18 +70,6 @@ class CustomButtonBlocConsumer extends StatelessWidget {
                             "currency": "USD"
                           }
                         ],
-
-                        // Optional
-                        //   "shipping_address": {
-                        //     "recipient_name": "Tharwat samy",
-                        //     "line1": "tharwat",
-                        //     "line2": "",
-                        //     "city": "tharwat",
-                        //     "country_code": "EG",
-                        //     "postal_code": "25025",
-                        //     "phone": "+00000000",
-                        //     "state": "ALex"
-                        //  },
                       }
                     }
                   ],
