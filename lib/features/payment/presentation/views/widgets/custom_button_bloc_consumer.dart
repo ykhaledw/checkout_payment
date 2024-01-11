@@ -79,9 +79,16 @@ class CustomButtonBlocConsumer extends StatelessWidget {
         note: "Contact us for any questions on your order.",
         onSuccess: (Map params) async {
           log("onSuccess: $params");
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-            return ThankYouView();
-          }));
+          Navigator.pushAndRemoveUntil(context,
+              MaterialPageRoute(builder: (context) {
+            return const ThankYouView();
+          }), (route) {
+            if (route.settings.name == '/') {
+              return true;
+            } else {
+              return false;
+            }
+          });
         },
         onError: (error) {
           log("onError: $error");
