@@ -16,7 +16,10 @@ import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 class CustomButtonBlocConsumer extends StatelessWidget {
   const CustomButtonBlocConsumer({
     super.key,
+    required this.isPaypal,
   });
+
+  final bool isPaypal;
 
   @override
   Widget build(BuildContext context) {
@@ -38,19 +41,25 @@ class CustomButtonBlocConsumer extends StatelessWidget {
       builder: (context, state) {
         return CustomButton(
             onTap: () {
-              /*PaymentIntentInputModel paymentIntentInputModel =
-                  PaymentIntentInputModel(amount: '100', currency: 'USD', customerId: 'cus_PLKokmllNSTIeV');
-              BlocProvider.of<PaymentCubit>(context).makePayment(
-                  paymentIntentInputModel: paymentIntentInputModel);*/
+              if (isPaypal) {
+                var transactionData = getTransactionData();
 
-              var transactionData = getTransactionData();
-
-              executePayPalPayment(context, transactionData);
+                executePayPalPayment(context, transactionData);
+              } else {
+                executeStripePayment(context);
+              }
             },
             isLoading: state is PaymentLoading ? true : false,
             text: 'Continue');
       },
     );
+  }
+
+  void executeStripePayment(BuildContext context) {
+    PaymentIntentInputModel paymentIntentInputModel = PaymentIntentInputModel(
+        amount: '100', currency: 'USD', customerId: 'cus_PLKokmllNSTIeV');
+    BlocProvider.of<PaymentCubit>(context)
+        .makePayment(paymentIntentInputModel: paymentIntentInputModel);
   }
 
   void executePayPalPayment(BuildContext context,
