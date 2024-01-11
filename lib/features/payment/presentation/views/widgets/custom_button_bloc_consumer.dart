@@ -1,13 +1,13 @@
 import 'dart:developer';
 
+import 'package:checkout_payment_app/core/functions/get_transaction.dart';
 import 'package:checkout_payment_app/core/utils/api_keys.dart';
 import 'package:checkout_payment_app/core/widgets/custom_button.dart';
 import 'package:checkout_payment_app/features/payment/data/models/amount_model/amount_model.dart';
-import 'package:checkout_payment_app/features/payment/data/models/amount_model/details.dart';
-import 'package:checkout_payment_app/features/payment/data/models/item_list_model/item.dart';
 import 'package:checkout_payment_app/features/payment/data/models/item_list_model/item_list_model.dart';
 import 'package:checkout_payment_app/features/payment/data/models/payment_intent_input_model.dart';
 import 'package:checkout_payment_app/features/payment/presentation/manager/cubit/payment_cubit.dart';
+import 'package:checkout_payment_app/features/payment/presentation/views/cart_view.dart';
 import 'package:checkout_payment_app/features/payment/presentation/views/thank_you_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -92,7 +92,12 @@ class CustomButtonBlocConsumer extends StatelessWidget {
         },
         onError: (error) {
           log("onError: $error");
-          Navigator.pop(context);
+          SnackBar snackBar = SnackBar(content: Text(error.toString()));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          Navigator.pushAndRemoveUntil(context,
+              MaterialPageRoute(builder: (context) {
+            return const CartView();
+          }), (route) => false);
         },
         onCancel: () {
           print('cancelled:');
@@ -100,36 +105,5 @@ class CustomButtonBlocConsumer extends StatelessWidget {
         },
       ),
     ));
-  }
-
-  ({AmountModel amount, ItemListModel itemList}) getTransactionData() {
-    var amount = AmountModel(
-      currency: 'USD',
-      total: "100",
-      details: Details(
-        shipping: "0",
-        shippingDiscount: 0,
-        subtotal: '100',
-      ),
-    );
-
-    List<OrderItemModel> orders = [
-      OrderItemModel(
-        currency: 'USD',
-        name: 'Apple',
-        price: "10",
-        quantity: 4,
-      ),
-      OrderItemModel(
-        currency: 'USD',
-        name: 'Pinapple',
-        price: "12",
-        quantity: 5,
-      ),
-    ];
-
-    var itemList = ItemListModel(orders: orders);
-
-    return (amount: amount, itemList: itemList);
   }
 }
